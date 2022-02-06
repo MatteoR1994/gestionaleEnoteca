@@ -25,20 +25,20 @@ class Cantina {
         const bevande = this.birre.concat(this.superAlcolici).concat(this.vini);
         let risultatoRicerca = [];
         for (const bevanda of bevande) {
-            let stessoNome = bevanda.toLowerCase().nomeProdotto.includes(stringa.toLowerCase());
+            let stessoNome = bevanda.nomeProdotto.toLowerCase().includes(stringa.toLowerCase());
             let stessoCodice = bevanda.generateCode() === stringa;
             if (stessoNome || stessoCodice) {
                 risultatoRicerca.push(bevanda);
             }
-            return risultatoRicerca;
         }
+        return risultatoRicerca;
     }
 
     cercaPerVitigno(vitigno){
         let risultatoRicerca = []
 
         for (const vino of this.vini) {
-            let stessoVitigno = vino.vitigno.toLowerCase().includes(vitigno);
+            let stessoVitigno = vino.vitigno.toLowerCase().includes(vitigno.toLowerCase());
             if (stessoVitigno) {
                 risultatoRicerca.push(vino);
             }
@@ -104,23 +104,61 @@ class Cantina {
     }
 
     // Aggiungere bottiglie tramite code
-    
+    aggiungiBottiglie(codiceProdotto, numero) {
+        const prodottiPerCodice = this.cercaPerNomeCodice(codiceProdotto);
+        prodottiPerCodice.map((element) => element.numeroBottiglie = element.numeroBottiglie + numero);
+    }
 
     // Togliere bottiglie tramite code
-
+    eliminaBottiglie(codiceProdotto, numero) {
+        const prodottiPerCodice = this.cercaPerNomeCodice(codiceProdotto);
+        for (const elemento of prodottiPerCodice) {
+            if (elemento.numeroBottiglie >= 1) {
+                elemento.numeroBottiglie -= numero;
+            } else {
+                console.log("Non puoi togliere bottiglie a questo prodotto: " + codiceProdotto + " perché non ne risultano registrate.");
+            }
+        }
+    }
 
     // Numero di bottiglie per code
-
+    numeroBottigliePerCodice(codice) {
+        const prodottiPerCodice = this.cercaPerNomeCodice(codice);
+        const numero = prodottiPerCodice.reduce((p, c) => p + c.numeroBottiglie, 0);
+        return numero
+    }
 
     // Numero di bottiglie di vino, birra, superalcolici parziale e totale
-
+    conteggioBottiglie() {
+        const risultati = [];
+        const numeroBottiglieBirra = this.birre.reduce((p, c) => p + c.numeroBottiglie, 0);
+        const numeroBottiglieVino = this.vini.reduce((p, c) => p + c.numeroBottiglie, 0);
+        const numeroBottiglieSuperAlcolici = this.superAlcolici.reduce((p, c) => p + c.numeroBottiglie, 0);
+        const bottiglieTotali = numeroBottiglieBirra + numeroBottiglieVino + numeroBottiglieSuperAlcolici;
+        risultati.push(numeroBottiglieBirra);
+        risultati.push(numeroBottiglieVino);
+        risultati.push(numeroBottiglieSuperAlcolici);
+        risultati.push(bottiglieTotali);
+        return risultati;
+    }
 
     // Numero di bottiglie di vino per vitigno
-
+    conteggioBottigliePerVitigno(vitigno) {
+        const viniPerVitigno = this.cercaPerVitigno(vitigno);
+        const bottigliePerVitigno = viniPerVitigno.reduce((p, c) => p + c.numeroBottiglie, 0);
+        return bottigliePerVitigno;
+    }
 
     // Numero di bottiglie di vino per anno
-
+    numeroBottiglieVinoPerAnno(anno) {
+        const numero = this.vini.filter((element) => element.annoImbottigliamento === anno).reduce((p, c) => p + c.numeroBottiglie, 0);
+        return numero;
+    }
 
     // Numero di birre per tipologia
+    numeroBottiglieBirraPerTipologia(tipologia) {
+        const numero = this.birre.filter((element) => element.tipologia === tipologia).reduce((p, c) => p + c.numeroBottiglie, 0);
+        return numero;
+    }
 
 }

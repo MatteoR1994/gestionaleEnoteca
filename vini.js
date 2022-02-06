@@ -7,12 +7,12 @@ class Vino extends Bevanda {
         this.vitigno = vitigno;
     }
 
-    prezzoIva() {
+    prezzoConIva() {
         let prezzo = super.prezzoConIva();
         let now = new Date();
         let actualYear = now.getFullYear();
         let anniVino = actualYear - this.annoImbottigliamento; // 1% x anniVino => anniVino% - 1% x 20 => 20%
-        let prezzoInvecchiamento = prezzo + (anniVino*prezzo/100);
+        let prezzoInvecchiamento = prezzo + (anniVino * prezzo / 100);
         return prezzoInvecchiamento.toFixed(2);
     }
 

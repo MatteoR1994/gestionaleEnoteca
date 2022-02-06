@@ -10,8 +10,12 @@ class Bevanda {
     }
 
     generateCode() {
-        let timestamp = this.dataInserimento.getTime();
-        return timestamp;
+        // let timestamp = this.dataInserimento.getTime();
+        // return timestamp;
+        let code = this.constructor.name.toLowerCase() 
+                 + this.nomeProdotto.toLowerCase().substring(0,2)
+                 + this.marca.toLowerCase().substring(1,3);
+        return code;
     }
 
     prezzoConIva() {
@@ -26,7 +30,8 @@ class Bevanda {
                    "Codice: " + this.generateCode() + "\n" +
                    "Anno di imbottigliamento: " + this.annoImbottigliamento + "\n" +
                    "Prezzo iva esclusa: " + this.prezzoNoIva + " € " + "\n" +
-                   "Prezzo con Iva(maggiorato dell'1% per ogni anno di invecchiamento) : " + this.prezzoConIva() + " €" + "\n";
+                   "Prezzo con Iva (maggiorato dell'1% per ogni anno di invecchiamento) : " + this.prezzoConIva() + " €" + "\n" +
+                   "Bottiglie possedute: " + this.numeroBottiglie + "\n";
 
         }
         else {
@@ -34,7 +39,8 @@ class Bevanda {
                    "Prodotto: " + this.nomeProdotto + "\n" +
                    "Codice: " + this.generateCode() + "\n" +
                    "Prezzo: " + this.prezzoNoIva + " € (iva esclusa) " + "\n" +
-                   "Prezzo con Iva: " + this.prezzoConIva() + " €" + "\n";
+                   "Prezzo con Iva: " + this.prezzoConIva() + " €" + "\n" +
+                   "Bottiglie possedute: " + this.numeroBottiglie + "\n";
         }
     }
 
