@@ -1,4 +1,4 @@
-class Bevande {
+class Bevanda {
 
     constructor(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento) {
         this.marca = marca;

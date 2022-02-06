@@ -6,100 +6,97 @@ class Cantina {
         this.superAlcolici=[];        
     }    
 
-    addProdotto(prodotto) {
-        /// fare controllo presenza 
-        switch (prodotto.constructor.name) {
-            case "Vini":
-                this.vini.push(prodotto);
-                break;
-            case "Birre":
-                this.birre.push(prodotto);
-                break;
-            case "SuperAlcolici":
-                this.superAlcolici.push(prodotto);
-                break;
-        }
-    }
+    // addProdotto(prodotto) {
+    //     /// fare controllo presenza 
+    //     switch (prodotto.constructor.name) {
+    //         case "Vini":
+    //             this.vini.push(prodotto);
+    //             break;
+    //         case "Birre":
+    //             this.birre.push(prodotto);
+    //             break;
+    //         case "SuperAlcolici":
+    //             this.superAlcolici.push(prodotto);
+    //             break;
+    //     }
+    // }
 
-    searchByNameOrCode(string) {
-        const bevandes = this.birre.concat(this.superAlcolici).concat(this.vini);
-        let searchResult = [];
-        for (const bevande of bevandes) {
-            let sameName = bevande.toLowerCase().name.includes(string.toLowerCase());
-            let sameCode = bevande.generateCode() === string;
-            if (sameName || sameCode) {
-                searchResult.push(bevande);
+    cercaPerNomeCodice(stringa) {
+        const bevande = this.birre.concat(this.superAlcolici).concat(this.vini);
+        let risultatoRicerca = [];
+        for (const bevanda of bevande) {
+            let stessoNome = bevanda.toLowerCase().nomeProdotto.includes(stringa.toLowerCase());
+            let stessoCodice = bevanda.generateCode() === stringa;
+            if (stessoNome || stessoCodice) {
+                risultatoRicerca.push(bevanda);
             }
-            return searchResult;
+            return risultatoRicerca;
         }
     }
 
-    searchByVine(vine){
-        let searchResult = []
+    cercaPerVitigno(vitigno){
+        let risultatoRicerca = []
 
-        for (const wine of this.wines) {
-            let sameVine = wine.vine.toLowerCase().includes(vine);
-            if (sameVine) {
-                searchResult.push(wine);
+        for (const vino of this.vini) {
+            let stessoVitigno = vino.vitigno.toLowerCase().includes(vitigno);
+            if (stessoVitigno) {
+                risultatoRicerca.push(vino);
             }
         }
 
-        return searchResult;
+        return risultatoRicerca;
     }
 
-    addBeverage(beverage){
-        switch (beverage.constructor.name) {
-            case "Beer":
-                this.addBeer(beverage)
+    aggiungiBevanda(bevanda){
+        switch (bevanda.constructor.name) {
+            case "Birra":
+                this.aggiungiBirra(bevanda)
                 break;
-            case "Wine":
-                this.addWine(beverage)
+            case "Vino":
+                this.aggiungiVino(bevanda)
                 break;
             default:
-                this.addSpirit(beverage)
+                this.aggiungiSuperAlcolico(bevanda)
                 break;
         }
 
     }
 
-
-    addWine(wine){
-        if (!this.checkWinePresence(wine)) {
-            this.wines.push(wine);
+    aggiungiVino(vino){
+        if (!this.controllaPresenzaVino(vino)) {
+            this.vini.push(vino);
         }
     }
 
-    addBeer(beer){
-        if (!this.checkBeerPresence(beer)) {
-            this.beers.push(beer);
+    aggiungiBirra(birra){
+        if (!this.controllaPresenzaBirra(birra)) {
+            this.birre.push(birra);
         }
     }
 
-    addSpirit(spirit){
-        if (!this.checkBeerPresence(spirit)) {
-            this.spirits.push(spirit);
+    aggiungiSuperAlcolico(supAlc){
+        if (!this.controllaPresenzaSuperAlcolico(supAlc)) {
+            this.superAlcolici.push(supAlc);
         }
     }
 
-
-
-    checkWinePresence(wine){
-        return Cellar.checkPresence(wine, this.wines)
+    controllaPresenzaVino(vino){
+        return Cantina.controllaPresenza(vino, this.vini)
     }
 
-    checkBeerPresence(beer){
-        return Cellar.checkPresence(beer, this.beers)
+    controllaPresenzaBirra(birra){
+        return Cantina.controllaPresenza(birra, this.birre)
     }
 
-    checkSpiritPresence(spirit){
-        return Cellar.checkPresence(spirit, this.spirits)
+    controllaPresenzaSuperAlcolico(superAlcolico){
+        return Cantina.controllaPresenza(superAlcolico, this.superAlcolici)
     }
 
 
-    static checkPresence(newBeverage, arrayOfBeverages){
+    static controllaPresenza(nuovaBevanda, arrayDiBevande){
         let isPresent = false
-        for (const beverage of arrayOfBeverages) {
-            if (beverage.code === newBeverage.code) {
+        for (const bevanda of arrayDiBevande) {
+            if (bevanda.generateCode() === nuovaBevanda.generateCode()) {
                 isPresent = true;
             }
         }
@@ -107,7 +104,7 @@ class Cantina {
     }
 
     // Aggiungere bottiglie tramite code
-
+    
 
     // Togliere bottiglie tramite code
 

@@ -1,4 +1,4 @@
-class Vini extends Bevande {
+class Vino extends Bevanda {
 
     constructor(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento, annoImbottigliamento, vitigno) {
         super(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento);

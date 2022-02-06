@@ -1,4 +1,4 @@
-class Birre extends Bevande{
+class Birra extends Bevanda {
 
     constructor(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento, tipologia) {
         super(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento);

@@ -1,4 +1,4 @@
-class SuperAlcolici extends Bevande{
+class SuperAlcolico extends Bevanda {
 
     constructor(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento) {
         super(marca, nomeProdotto, prezzoNoIva, gradoAlcolico, dataInserimento);
