@@ -5,13 +5,13 @@ let etichetta = birra.toString();
 console.log(etichetta);
 
 
-let prezzoDettaglio = birra.prezzoIva();
+let prezzoDettaglio = birra.prezzoConIva();
 //console.log(prezzoDettaglio)
 
 
 let vino = new Vini ("Chianti","rosso",12,12,new Date(),2000,"BOH");
 
-let prezzoIva = vino.prezzoIva();
+let prezzoIva = vino.prezzoConIva();
 //console.log(prezzoIva);
  
 let etichettaVino = vino.toString();

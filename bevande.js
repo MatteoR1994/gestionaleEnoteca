@@ -6,14 +6,15 @@ class Bevande {
         this.prezzoNoIva = prezzoNoIva;
         this.gradoAlcolico = gradoAlcolico;
         this.dataInserimento = dataInserimento;
+        this.numeroBottiglie = 0;
     }
 
-    generateCodeBevande() {
+    generateCode() {
         let timestamp = this.dataInserimento.getTime();
         return timestamp;
     }
 
-    prezzoIva() {
+    prezzoConIva() {
         let prezzoIva = (this.prezzoNoIva * this.iva / 100) + this.prezzoNoIva;
         return prezzoIva;
     }
@@ -22,18 +23,18 @@ class Bevande {
         if (this.annoImbottigliamento) {
             return "Marca: " + this.marca + "\n" +
                    "Prodotto: " + this.nomeProdotto + "\n" +
-                   "Codice: " + this.generateCodeBevande() + "\n" +
+                   "Codice: " + this.generateCode() + "\n" +
                    "Anno di imbottigliamento: " + this.annoImbottigliamento + "\n" +
                    "Prezzo iva esclusa: " + this.prezzoNoIva + " € " + "\n" +
-                   "Prezzo con Iva(maggiorato dell'1% per ogni anno di invecchiamento) : " + this.prezzoIva() + " €" + "\n";
+                   "Prezzo con Iva(maggiorato dell'1% per ogni anno di invecchiamento) : " + this.prezzoConIva() + " €" + "\n";
 
         }
         else {
             return "Marca: " + this.marca + "\n" +
                    "Prodotto: " + this.nomeProdotto + "\n" +
-                   "Codice: " + this.generateCodeBevande() + "\n" +
+                   "Codice: " + this.generateCode() + "\n" +
                    "Prezzo: " + this.prezzoNoIva + " € (iva esclusa) " + "\n" +
-                   "Prezzo con Iva: " + this.prezzoIva() + " €" + "\n";
+                   "Prezzo con Iva: " + this.prezzoConIva() + " €" + "\n";
         }
     }
 

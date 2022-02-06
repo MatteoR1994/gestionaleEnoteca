@@ -8,7 +8,7 @@ class Vini extends Bevande {
     }
 
     prezzoIva() {
-        let prezzo = super.prezzoIva();
+        let prezzo = super.prezzoConIva();
         let now = new Date();
         let actualYear = now.getFullYear();
         let anniVino = actualYear - this.annoImbottigliamento; // 1% x anniVino => anniVino% - 1% x 20 => 20%
