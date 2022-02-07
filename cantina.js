@@ -113,7 +113,7 @@ class Cantina {
     eliminaBottiglie(codiceProdotto, numero) {
         const prodottiPerCodice = this.cercaPerNomeCodice(codiceProdotto);
         for (const elemento of prodottiPerCodice) {
-            if (elemento.numeroBottiglie >= 1) {
+            if (elemento.numeroBottiglie >= numero) {
                 elemento.numeroBottiglie -= numero;
             } else {
                 console.log("Non puoi togliere bottiglie a questo prodotto: " + codiceProdotto + " perché non ne risultano registrate.");
